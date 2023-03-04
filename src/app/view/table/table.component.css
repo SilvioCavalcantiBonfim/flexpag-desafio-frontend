@@ -1,0 +1,13 @@
+.result {
+    font-size: 5rem;
+    font-weight: 500;
+}
+.parent {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr 2fr;
+    grid-template-rows: repeat(5, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+    align-items: center;
+}
+.div1 { grid-area: 3 / 3 / 6 / 5; }

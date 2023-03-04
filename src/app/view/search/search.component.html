@@ -1,0 +1,40 @@
+<div class="px-1">
+    <div class="d-flex gap-2 flex-grow-1">
+        <app-dropdown 
+            title="Tipo de veículo" 
+            [itens]="controller.allTypes" 
+            [value]="controller.type" 
+            (change)="controller.setType($event)"
+            (onChange)="controller.updateBrandsList()" 
+            class="dropdown1" 
+        />
+        <app-dropdown 
+            title="Marca" 
+            [itens]="controller.allBrands" 
+            [value]="controller.brand" 
+            (change)="controller.setBrand($event)"
+            (onChange)="controller.updateModelsList()" 
+            class="dropdown2" 
+        />
+        <app-dropdown 
+            title="Modelo" 
+            [itens]="controller.allModels" 
+            [value]="controller.model" 
+            (change)="controller.setModel($event)"
+            (onChange)="controller.updateYearsList()" 
+            class="dropdown3" 
+        />
+        <app-dropdown 
+            title="Ano" 
+            [itens]="controller.allYears" 
+            [value]="controller.year" 
+            (change)="controller.setYear($event)"
+            (onChange)="controller.updateFipe()"
+            class="dropdown4" 
+        />
+        <app-value 
+            [value]="controller.value" 
+            (readInput)="controller.setValue($event)" 
+        />
+    </div>
+</div>

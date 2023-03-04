@@ -1,0 +1,17 @@
+<div ngbDropdown class="nav-item">
+    <h6 class="mb-0">{{title | titlecase}}:</h6>
+    <button 
+        type="button" 
+        class="btn btn-secondary w-100 text-truncate d-flex align-items-center justify-content-between" 
+        id="dropdownConfig"
+        [disabled]="listNotSelected.length === 0" 
+        ngbDropdownToggle
+    >{{valueMode | titlecase}}</button>
+    <div ngbDropdownMenu aria-labelledby="dropdownConfig" class="dpcontainer">
+        <button 
+            ngbDropdownItem 
+            *ngFor="let v of listNotSelected" 
+            (click)="setValue(v)"
+        >{{(v !== undefined && v.nome != undefined)? v.nome: v | titlecase}}</button>
+    </div>
+</div>

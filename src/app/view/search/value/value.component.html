@@ -1,0 +1,10 @@
+<h6 class="mb-0">Valor da venda:</h6>
+<div class="input-group">
+    <span class="input-group-text">R$</span>
+    <input 
+        matInput
+        class="form-control"
+        [ngModel]="value | real"
+        (ngModelChange)="onChange($event)"
+    />
+</div>

@@ -1,0 +1,24 @@
+/* You can add global styles to this file, and also import other style files */
+* {
+    transition: color .3s linear, background-color .3s linear;
+}
+
+@keyframes bg-pan-left {
+    0% {
+        background-position: 7500vw 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
