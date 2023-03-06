@@ -18,6 +18,7 @@ import { monthPipe } from './controller/pipes/monthRef.pipe';
 //app imports
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { NotificationComponent } from './view/notification/notification.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { AppComponent } from './app.component';
     ValueComponent,
     SearchComponent,
     realPipe,
-    monthPipe
+    monthPipe,
+    NotificationComponent
   ],
   imports: [
     BrowserModule,

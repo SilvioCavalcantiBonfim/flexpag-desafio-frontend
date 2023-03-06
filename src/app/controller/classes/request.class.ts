@@ -1,4 +1,5 @@
 import { HttpClient } from "@angular/common/http";
+import { ErrorService } from "../error/error.service";
 import { ano, fipe, marca, modelo, modelos } from "../interfaces/parallelum.interface";
 import { query } from "./query.class";
 
@@ -9,7 +10,7 @@ import { query } from "./query.class";
 
     As arrays obedecem às interfaces relativas às requisições testadas com antecedencia com o 
     Postman e as informações passadas no scopo do desafio.
-*/ 
+*/
 
 export class request extends query {
 
@@ -18,10 +19,10 @@ export class request extends query {
     private AllModels: modelo[] = [];
     private AllYears: ano[] = [];
 
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpClient, private error: ErrorService) {
         super();
     }
-    
+
     // getter
     public get allTypes(): string[] {
         return this.AllTypes;
@@ -39,6 +40,14 @@ export class request extends query {
         return this.AllYears;
     }
 
+    private handleError() {
+        this.error.addError("Erro na comunicação com a API.");
+        this.AllBrands = [];
+        this.AllModels = [];
+        this.AllYears = [];
+        this.resetUntilBrand();
+    }
+
     //updates
     public updateBrandsList(): void {
         //so permite a requisição get se um tipo de veiculo for escolhido
@@ -53,7 +62,8 @@ export class request extends query {
         const urlRequestGet = `https://parallelum.com.br/fipe/api/v1/${this.type.replace('õ', 'o')}/marcas`;
         //eefetua o GET
         this.http.get<marca[]>(urlRequestGet).subscribe({
-            next: (r) => this.AllBrands = r
+            next: (r) => this.AllBrands = r,
+            error: () => this.handleError()
         });
     }
 
@@ -64,7 +74,8 @@ export class request extends query {
         this.resetUntilModel();
         const urlRequestGet = `https://parallelum.com.br/fipe/api/v1/${this.type.replace('õ', 'o')}/marcas/${this.brand?.codigo}/modelos`;
         this.http.get<modelos>(urlRequestGet).subscribe({
-            next: r => this.AllModels = r.modelos
+            next: r => this.AllModels = r.modelos,
+            error: () => this.handleError()
         });
     }
 
@@ -74,12 +85,13 @@ export class request extends query {
         this.resetUntilYear();
         const urlRequestGet = `https://parallelum.com.br/fipe/api/v1/${this.type.replace('õ', 'o')}/marcas/${this.brand?.codigo}/modelos/${this.model?.codigo}/anos`;
         this.http.get<ano[]>(urlRequestGet).subscribe({
-            next: r => this.AllYears = r
+            next: r => this.AllYears = r,
+            error: () => this.handleError()
         });
     }
 
     public updateFipe(): void {
-        if (this.type === undefined || this.brand === undefined || this.model === undefined || this.year === undefined)return
+        if (this.type === undefined || this.brand === undefined || this.model === undefined || this.year === undefined) return
         const urlRequestGet = `https://parallelum.com.br/fipe/api/v1/${this.type.replace('õ', 'o')}/marcas/${this.brand?.codigo}/modelos/${this.model?.codigo}/anos/${this.year.codigo}`;
         this.http.get<fipe>(urlRequestGet).subscribe({
             next: (r) => {
@@ -87,7 +99,8 @@ export class request extends query {
                 const value = Number(r.Valor.substr(3).replaceAll('.', '').replace(',', '.'));
                 this.setValue(value);
                 this.setFipe({ ...r, ValorNumerico: value });
-            }
+            },
+            error: () => this.handleError()
         });
     }
 }
