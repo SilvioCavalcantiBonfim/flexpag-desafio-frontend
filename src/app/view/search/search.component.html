@@ -6,7 +6,7 @@
             [value]="controller.type" 
             (change)="controller.setType($event)"
             (onChange)="controller.updateBrandsList()" 
-            class="dropdown1" 
+            style="width: 20%"
         />
         <app-dropdown 
             title="Marca" 
@@ -14,7 +14,7 @@
             [value]="controller.brand" 
             (change)="controller.setBrand($event)"
             (onChange)="controller.updateModelsList()" 
-            class="dropdown2" 
+            class="w-25" 
         />
         <app-dropdown 
             title="Modelo" 
@@ -22,7 +22,7 @@
             [value]="controller.model" 
             (change)="controller.setModel($event)"
             (onChange)="controller.updateYearsList()" 
-            class="dropdown3" 
+            class="w-25" 
         />
         <app-dropdown 
             title="Ano" 
@@ -30,7 +30,7 @@
             [value]="controller.year" 
             (change)="controller.setYear($event)"
             (onChange)="controller.updateFipe()"
-            class="dropdown4" 
+            style="width: 20%" 
         />
         <app-value 
             [value]="controller.value" 
