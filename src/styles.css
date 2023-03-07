@@ -5,12 +5,23 @@
 
 @keyframes bg-pan-left {
     0% {
-        background-position: 1250vw 50%;
-    }
-
-    100% {
-        background-position: 0% 50%;
-    }
+        -webkit-transform: scale(1) translateY(0);
+                transform: scale(1) translateY(0);
+        -webkit-transform-origin: 50% 16%;
+                transform-origin: 50% 16%;
+      }
+      50% {
+        -webkit-transform: scale(1.25) translateY(-15px);
+                transform: scale(1.25) translateY(-15px);
+        -webkit-transform-origin: top;
+                transform-origin: top;
+      }
+      100% {
+        -webkit-transform: scale(1) translateY(0);
+                transform: scale(1) translateY(0);
+        -webkit-transform-origin: 50% 16%;
+                transform-origin: 50% 16%;
+      }
 }
 
 @keyframes fade-in {
